@@ -2,11 +2,11 @@
 #define TABLERO_HPP
 
 const int TAMANO = 10;
-const char VACIO = '.';
-const char BLANCA = 'b';
-const char NEGRA = 'n';
-const char DAMA_BLANCA = 'B';
-const char DAMA_NEGRA = 'N';
+char VACIO = '.';
+char BLANCA = 'b';
+char NEGRA = 'n';
+char DAMA_BLANCA = 'B';
+char DAMA_NEGRA = 'N';
 
 // Funciones del tablero
 void inicializarTablero(char tablero[TAMANO][TAMANO]);
