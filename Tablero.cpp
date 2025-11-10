@@ -1,4 +1,5 @@
 #include "tablero.h"
+#include "utilidades.h"
 #include <iostream>
 
 using namespace std;
@@ -17,6 +18,22 @@ void inicializarTablero(char tablero[TAMANO][TAMANO]) {
     }
 }
 
+void mostrarTablero(char tablero[TAMANO][TAMANO]) {
+    limpiarPantalla();
+    cout << "\n    ";
+    for (int j = 0; j < TAMANO; j++) {
+        cout << j << "   ";
+    }
+    cout << "\n";
+    
+    for (int i = 0; i < TAMANO; i++) {
+        cout << i << " | ";
+        for (int j = 0; j < TAMANO; j++) {
+            cout << tablero[i][j] << " | ";
+        }
+        cout << "\n";
+    }
+}
 
 char obtenerPieza(char tablero[TAMANO][TAMANO], int fila, int col) {
     if (esPosicionValida(fila, col)) {
