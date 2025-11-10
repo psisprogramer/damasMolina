@@ -19,7 +19,8 @@ void inicializarJugador(Jugador* jugador, int num) {
 void configurarJugador(Jugador* jugador) {
     cout << "\nNombre del Jugador " << jugador->numero 
          << " (" << (jugador->numero == 1 ? "Blancas" : "Negras") << "): ";
-
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, jugador->nombre);
 }
 
 bool esSuPieza(Jugador* jugador, char pieza) {
