@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// Variables globales
 char tableroJuego[TAMANO][TAMANO];
 Jugador jugador1;
 Jugador jugador2;
