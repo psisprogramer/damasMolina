@@ -5,6 +5,7 @@
 #include <sstream>
 #include <limits>
 #include <string>
+#include <windows.h>
 
 std::string jugador1;
 std::string jugador2;
@@ -15,7 +16,6 @@ int leerEnteroSeguro(std::string mensaje) {
         std::cout << mensaje;
         if (!std::getline(std::cin, linea)) {
             std::cin.clear();
-            std::cout << "\a\n" ;
             continue;
         }
         std::stringstream ss(linea);
@@ -24,14 +24,15 @@ int leerEnteroSeguro(std::string mensaje) {
             std::string rest;
             if (!(ss >> rest)) return valor;
         }
-        std::cout << C_ROJO << "Entrada invalida. Introduce un numero entero." << RESET << std::endl;
         std::cout << "\a\n" ;
+        std::cout << C_ROJO << "Entrada invalida. Introduce un numero entero." << RESET << std::endl;
+        
     }
 }
 
 void pausarConEnter() {
-    std::cout << std::endl << "Presiona Enter para continuar...";
-    std::cout << "\a\n" ;
+    std::cout << std::endl << "Presiona Enter para continuar...";  
+    Beep(1000, 150) ;
     std::string tmp;
     std::getline(std::cin, tmp);
 }
@@ -47,6 +48,7 @@ void configurarJugadores() {
 
 void mostrarReglas() {
     limpiarPantalla();
+    Beep(1000, 150) ;
     std::cout << std::endl << "==== REGLAS ====" << std::endl;
     std::cout << "- Tablero 10x10, se juega en casillas oscuras." << std::endl;
     std::cout << "- Blancas (b) comienzan en filas abajo; negras (n) arriba." << std::endl;
@@ -106,25 +108,27 @@ void jugarPartida() {
 void mostrarMenu() {
     while (true) {
         limpiarPantalla();
-                std::cout << "\a\n" ;
-        std::cout << C_AZUL << std::endl << "===== DAMAS INTERNACIONALES =====" << RESET << std::endl << std::endl;
-        std::cout << "|1. Iniciar nueva partida      |"<< std::endl;
-        std::cout << "|2. Ver reglas                 |"<< std::endl;
-        std::cout << "|3. Salir                      |"<< std::endl;
-        std::cout << C_AZUL << std::endl << "================================="<< RESET << std::endl;
-        int opcion = leerEnteroSeguro("Selecciona una opcion: ");
+         Beep(1000, 150) ;
+        std::cout << C_AZUL << std::endl << "======== DAMAS INTERNACIONALES - EL RETO ========" << RESET << std::endl << std::endl;
+        std::cout << "||" << "1. Lanzarse a la aventura (Nueva partida)!     "<< "||"<< std::endl;
+        std::cout << "||" << "2. Sabiduria Ancestral (Ver reglas)            "<< "||"<< std::endl;
+        std::cout << "||" << "3. ¡Rendicion! (Salir del juego)               "<< "||"<< std::endl;
+        std::cout << C_AZUL << std::endl << "================================================="<< RESET << std::endl;
+        int opcion = leerEnteroSeguro("  ---> Elige tu destino (1, 2 o 3): ");
         if (opcion == 1) {
-            std::cout << std::endl << "Iniciando partida..." << std::endl;
+            std::cout << std::endl << C_MORADO_REAL << BG_GRIS_PLATA << "Prepara tus fichas! La batalla está a punto de comenzar..." << std::endl;
+           Beep(300, 400);
             pausarConEnter();
             jugarPartida();
             std::cout << "\a\n" ;
         } else if (opcion == 2) {
+            std::cout << C_VERDE_LIMON << "\nDesempolvando el pergamino de la sabiduría milenaria..." << std::endl;
             mostrarReglas();
         } else if (opcion == 3) {
-            std::cout << C_VERDE << std::endl << "Gracias por jugar. Hasta la proxima!" << RESET << std::endl;
+            std::cout << C_VERDE << std::endl << "\nAdios, gran estratega. Que los dados te sean favorables hasta que volvamos a vernos!" << RESET << std::endl;
             break;
         } else {
-            std::cout << C_ROJO << "Opcion invalida." << RESET << std::endl;
+            std::cout << C_ROJO << "\n ERROR CRITICO DE ELECCION! Esa opcion no existe en este universo. Intenta de nuevo..." << RESET << std::endl;
             pausarConEnter();
         }
     }
