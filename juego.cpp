@@ -7,6 +7,11 @@
 #include <string>
 #include <windows.h>
 
+const char* Fondo=BG_LIGHT;
+const char* texto = C_FUCSIA;
+const char* BORDES = C_AZUL_CLARO;
+const int ANCHO = 55;
+
 std::string jugador1;
 std::string jugador2;
 
@@ -108,28 +113,52 @@ void jugarPartida() {
 void mostrarMenu() {
     while (true) {
         limpiarPantalla();
-         Beep(1000, 150) ;
-        std::cout << C_AZUL << std::endl << "======== DAMAS INTERNACIONALES - EL RETO ========" << RESET << std::endl << std::endl;
-        std::cout << "||" << "1. Lanzarse a la aventura (Nueva partida)!     "<< "||"<< std::endl;
-        std::cout << "||" << "2. Sabiduria Ancestral (Ver reglas)            "<< "||"<< std::endl;
-        std::cout << "||" << "3. ¡Rendicion! (Salir del juego)               "<< "||"<< std::endl;
-        std::cout << C_AZUL << std::endl << "================================================="<< RESET << std::endl;
-        int opcion = leerEnteroSeguro("  ---> Elige tu destino (1, 2 o 3): ");
+        Beep(1000, 150); 
+        std::cout << Fondo << BORDES << "\n.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+        std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+        std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+        std::cout << Fondo << texto << "   ======== DAMAS INTERNACIONALES - EL RETO ========  " << RESET << "\n";
+        std::cout << Fondo << texto << "|                                                    |" << RESET << "\n"; 
+        std::cout << Fondo << texto << "|  1. Lanzarse a la aventura (Nueva partida)!        |" << RESET << "\n"; 
+        std::cout << Fondo << texto << "|  2. Codice Ancestral (Ver reglas)                  |" << RESET << "\n"; 
+        std::cout << Fondo << texto << "|  3.  Rendicion! (Salir del juego)                  |" << RESET << "\n";
+        std::cout << Fondo << texto << "|                                                    |" << RESET << "\n"; 
+        std::cout << Fondo << texto << "======================================================" << RESET << "\n";
+        std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+        std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+        std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n\n"; 
+        int opcion = leerEnteroSeguro(C_AMARILLO_ORO "      ---> Elige tu destino (1, 2 o 3):" RESET);
+        
         if (opcion == 1) {
-            std::cout << std::endl << C_MORADO_REAL << BG_GRIS_PLATA << "Prepara tus fichas! La batalla está a punto de comenzar..." << std::endl;
-           Beep(300, 400);
+            std::cout << "\n" << C_AMARILLO_ORO << BG_VINOTINTO << "¡Prepara tus fichas! La batalla esta a punto de comenzar..." << RESET << "\n";
+            Beep(300, 400); 
             pausarConEnter();
             jugarPartida();
-            std::cout << "\a\n" ;
+            std::cout << "\a\n";
         } else if (opcion == 2) {
-            std::cout << C_VERDE_LIMON << "\nDesempolvando el pergamino de la sabiduría milenaria..." << std::endl;
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << "\nDesempolvando el pergamino de la sabiduria milenaria..." << RESET << "\n";
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
             mostrarReglas();
         } else if (opcion == 3) {
-            std::cout << C_VERDE << std::endl << "\nAdios, gran estratega. Que los dados te sean favorables hasta que volvamos a vernos!" << RESET << std::endl;
-            break;
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO "\nAdios, gran estratega. ¡Que los dados te sean favorables hasta que volvamos a vernos!" << RESET << "\n";
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            Beep(300, 100); 
+            Beep(200, 100); 
         } else {
-            std::cout << C_ROJO << "\n ERROR CRITICO DE ELECCION! Esa opcion no existe en este universo. Intenta de nuevo..." << RESET << std::endl;
+            Beep(500, 300);
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            std::cout << C_ROJO << "\n¡ERROR CRITICO DE ELECCION! Esa opcion no existe en este universo. Intenta de nuevo..." << RESET << "\n";
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
             pausarConEnter();
-        }
+            break;
     }
+}
 }
