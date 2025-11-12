@@ -12,17 +12,9 @@
 #define C_VINOTINTO      "\033[38;5;88m"
 #define BG_VINOTINTO     "\033[48;5;88m"
 #define C_ROJO_SANGRE    "\033[38;5;160m"
-#define BG_ROJO_SANGRE   "\033[48;5;160m"
 #define C_FUCSIA         "\033[38;5;201m"
-#define BG_FUCSIA        "\033[48;5;201m"
 #define C_AZUL_CLARO     "\033[38;5;117m"
-#define BG_AZUL_CLARO    "\033[48;5;117m"
-#define C_CIAN_ELECTRICO "\033[38;5;51m"
-#define BG_CIAN_ELECTRICO "\033[48;5;51m"
 #define C_AMARILLO_ORO   "\033[38;5;220m"
-#define BG_AMARILLO_ORO  "\033[48;5;220m"
-#define C_GRIS_PLATA     "\033[38;5;250m"
-#define BG_GRIS_PLATA    "\033[48;5;250m"
 
 extern int TAMANO;
 extern char VACIO;
