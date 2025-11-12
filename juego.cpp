@@ -1,5 +1,6 @@
 #include "juego.h"
 #include "tablero.h"
+#include "ficha.h"
 #include <iostream>
 #include <sstream>
 #include <limits>
@@ -14,6 +15,7 @@ int leerEnteroSeguro(std::string mensaje) {
         std::cout << mensaje;
         if (!std::getline(std::cin, linea)) {
             std::cin.clear();
+            std::cout << "\a\n" ;
             continue;
         }
         std::stringstream ss(linea);
@@ -22,12 +24,14 @@ int leerEnteroSeguro(std::string mensaje) {
             std::string rest;
             if (!(ss >> rest)) return valor;
         }
-        std::cout << C_ROJO << "Entrada inválida. Introduce un número entero." << RESET << std::endl;
+        std::cout << C_ROJO << "Entrada invalida. Introduce un numero entero." << RESET << std::endl;
+        std::cout << "\a\n" ;
     }
 }
 
 void pausarConEnter() {
     std::cout << std::endl << "Presiona Enter para continuar...";
+    std::cout << "\a\n" ;
     std::string tmp;
     std::getline(std::cin, tmp);
 }
@@ -47,8 +51,8 @@ void mostrarReglas() {
     std::cout << "- Tablero 10x10, se juega en casillas oscuras." << std::endl;
     std::cout << "- Blancas (b) comienzan en filas abajo; negras (n) arriba." << std::endl;
     std::cout << "- Movimiento simple: diagonal 1 casilla hacia adelante (piezas normales)." << std::endl;
-    std::cout << "- Captura: salto sobre pieza enemiga a casilla vacía detrás (obligatorio si existe)." << std::endl;
-    std::cout << "- Capturas múltiples permitidas en un mismo turno." << std::endl;
+    std::cout << "- Captura: salto sobre pieza enemiga a casilla vacia detras (obligatorio si existe)." << std::endl;
+    std::cout << "- Capturas multiples permitidas en un mismo turno." << std::endl;
     std::cout << "- Dama: al coronar puede moverse y capturar a cualquier distancia diagonal." << std::endl;
     std::cout << "- Gana quien capture todas las piezas enemigas o deje al oponente sin movimientos." << std::endl << std::endl;
     pausarConEnter();
@@ -62,7 +66,7 @@ void jugarPartida() {
         mostrarTablero();
         std::cout << ((turno==1)?C_AZUL:C_ROJO)
                   << std::endl << "Turno de: " << (turno==1?jugador1:jugador2)
-                  << " (" << (turno==1?"b Blancas":"n Negras") << ")" << RESET << std::endl;
+                  << " (" << (turno==1?"o Blancas":"x Negras") << ")" << RESET << std::endl;
         if (!jugadorTieneMovimientos(turno)) {
             std::cout << C_ROJO << "No tienes movimientos disponibles. Pierdes." << RESET << std::endl;
             break;
@@ -71,12 +75,12 @@ void jugarPartida() {
         if (capturaObligatoria) std::cout << C_AMAR << "Hay captura obligatoria! Debes capturar si es posible." << RESET << std::endl;
         int f1 = leerEnteroSeguro("Fila origen: ");
         int c1 = leerEnteroSeguro("Columna origen: ");
-        if (!posicionValida(f1,c1)) { std::cout << C_ROJO << "Posición de origen fuera de tablero." << RESET << std::endl; pausarConEnter(); continue; }
+        if (!posicionValida(f1,c1)) { std::cout << C_ROJO << "Posicion de origen fuera de tablero." << RESET << std::endl; pausarConEnter(); continue; }
         char pieza = tablero[f1][c1];
         if (!esPiezaJugador(turno, pieza)) { std::cout << C_ROJO << "No hay una pieza tuya en esa casilla." << RESET << std::endl; pausarConEnter(); continue; }
         int f2 = leerEnteroSeguro("Fila destino: ");
         int c2 = leerEnteroSeguro("Columna destino: ");
-        if (!posicionValida(f2,c2)) { std::cout << C_ROJO << "Posición de destino fuera de tablero." << RESET << std::endl; pausarConEnter(); continue; }
+        if (!posicionValida(f2,c2)) { std::cout << C_ROJO << "Posicion de destino fuera de tablero." << RESET << std::endl; pausarConEnter(); continue; }
         int fc=-1, cc=-1;
         bool movimientoEsCaptura = false;
         if (esDama(pieza)) movimientoEsCaptura = esCapturaDama(f1,c1,f2,c2,turno,fc,cc);
@@ -95,29 +99,32 @@ void jugarPartida() {
         if (verificarVictoriaYMostrar(turno, jugador1, jugador2)) { pausarConEnter(); break; }
         if (cambioTurno) turno = (turno==1)?2:1;
     }
-    std::cout << std::endl << "Partida finalizada. Presiona Enter para volver al menú." << std::endl;
+    std::cout << std::endl << "Partida finalizada. Presiona Enter para volver al menu." << std::endl;
     pausarConEnter();
 }
 
 void mostrarMenu() {
     while (true) {
         limpiarPantalla();
-        std::cout << C_AZUL << std::endl << "===== DAMAS INTERNACIONALES (BÁSICO) =====" << RESET << std::endl;
-        std::cout << "1. Iniciar nueva partida" << std::endl;
-        std::cout << "2. Ver reglas" << std::endl;
-        std::cout << "3. Salir" << std::endl;
-        int opcion = leerEnteroSeguro("Selecciona una opción: ");
+                std::cout << "\a\n" ;
+        std::cout << C_AZUL << std::endl << "===== DAMAS INTERNACIONALES =====" << RESET << std::endl << std::endl;
+        std::cout << "|1. Iniciar nueva partida      |"<< std::endl;
+        std::cout << "|2. Ver reglas                 |"<< std::endl;
+        std::cout << "|3. Salir                      |"<< std::endl;
+        std::cout << C_AZUL << std::endl << "================================="<< RESET << std::endl;
+        int opcion = leerEnteroSeguro("Selecciona una opcion: ");
         if (opcion == 1) {
             std::cout << std::endl << "Iniciando partida..." << std::endl;
             pausarConEnter();
             jugarPartida();
+            std::cout << "\a\n" ;
         } else if (opcion == 2) {
             mostrarReglas();
         } else if (opcion == 3) {
-            std::cout << C_VERDE << std::endl << "Gracias por jugar. ¡Hasta la próxima!" << RESET << std::endl;
+            std::cout << C_VERDE << std::endl << "Gracias por jugar. Hasta la proxima!" << RESET << std::endl;
             break;
         } else {
-            std::cout << C_ROJO << "Opción inválida." << RESET << std::endl;
+            std::cout << C_ROJO << "Opcion invalida." << RESET << std::endl;
             pausarConEnter();
         }
     }

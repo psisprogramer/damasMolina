@@ -1,4 +1,5 @@
 #include "tablero.h"
+#include "ficha.h"
 #include <iostream>
 #include <cstdlib>
 
@@ -22,6 +23,7 @@ void inicializarTablero() {
     }
 }
 
+
 std::string simboloDe(char pieza) {
     if (pieza == BLANCA) return "b";
     if (pieza == NEGRA) return "n";
@@ -30,25 +32,47 @@ std::string simboloDe(char pieza) {
     return " ";
 }
 
+
 void mostrarTablero() {
     std::cout << std::endl;
+
+    
     std::cout << "   " << C_AMAR;
     for (int j = 0; j < TAMANO; j++) {
         std::cout << " " << j << " ";
     }
     std::cout << RESET << std::endl;
+
+    
     for (int i = 0; i < TAMANO; i++) {
         std::cout << C_AMAR << " " << i << " " << RESET;
+
         for (int j = 0; j < TAMANO; j++) {
             bool oscuro = ((i + j) % 2 == 1);
             std::string fondo = oscuro ? BG_DARK : BG_LIGHT;
-            std::cout << fondo << " " << simboloDe(tablero[i][j]) << " " << RESET;
+
+            char pieza = tablero[i][j];
+            std::string simbolo;
+
+            if (pieza == 'b')
+                simbolo = "o"; 
+            else if (pieza == 'n')
+                simbolo = "x";  
+            else if (pieza == 'B')
+                simbolo = "O";  
+            else if (pieza == 'N')
+                simbolo = "X";  
+            else
+                simbolo = " ";  
+
+            std::cout << fondo << " " << simbolo << " " << RESET;
         }
+
         std::cout << std::endl;
     }
-    std::cout << std::endl;
-    std::cout << "Leyenda: b=blanca  n=negra  B=dama blanca  N=dama negra" << std::endl;
 }
+
+
 void limpiarPantalla() {
 #ifdef _WIN32
     system("cls");
@@ -57,128 +81,6 @@ void limpiarPantalla() {
 #endif
 }
 
-bool posicionValida(int f, int c) {
-    return f >= 0 && f < TAMANO && c >= 0 && c < TAMANO;
-}
-
-bool esPiezaJugador(int jugador, char pieza) {
-    if (jugador == 1) return (pieza == BLANCA || pieza == DAMA_BLANCA);
-    return (pieza == NEGRA || pieza == DAMA_NEGRA);
-}
-
-bool esDama(char pieza) {
-    return pieza == DAMA_BLANCA || pieza == DAMA_NEGRA;
-}
-
-bool esCapturaMano(int f1, int c1, int f2, int c2, int jugador, int &fc, int &cc) {
-    if (!posicionValida(f2, c2)) return false;
-    if (tablero[f2][c2] != VACIO) return false;
-    int df = f2 - f1;
-    int dc = c2 - c1;
-    if (abs(df) != 2 || abs(dc) != 2) return false;
-    int fm = f1 + df / 2;
-    int cm = c1 + dc / 2;
-    char medio = tablero[fm][cm];
-    if (medio == VACIO) return false;
-    if (jugador == 1 && (medio == NEGRA || medio == DAMA_NEGRA)) { fc = fm; cc = cm; return true; }
-    if (jugador == 2 && (medio == BLANCA || medio == DAMA_BLANCA)) { fc = fm; cc = cm; return true; }
-    return false;
-}
-
-bool esCapturaDama(int f1, int c1, int f2, int c2, int jugador, int &fc, int &cc) {
-    if (!posicionValida(f2, c2)) return false;
-    if (tablero[f2][c2] != VACIO) return false;
-    int df = f2 - f1;
-    int dc = c2 - c1;
-    if (abs(df) != abs(dc)) return false;
-    int dirF = (df > 0) ? 1 : -1;
-    int dirC = (dc > 0) ? 1 : -1;
-    int enemigos = 0;
-    int fEn = -1, cEn = -1;
-    int pasos = abs(df);
-    for (int k = 1; k < pasos; k++) {
-        int rr = f1 + k * dirF;
-        int ccpos = c1 + k * dirC;
-        if (tablero[rr][ccpos] != VACIO) {
-            char pk = tablero[rr][ccpos];
-            if (esPiezaJugador(jugador, pk)) return false;
-            enemigos++;
-            fEn = rr; cEn = ccpos;
-            if (enemigos > 1) return false;
-        }
-    }
-    if (enemigos == 1) {
-        char enemigo = tablero[fEn][cEn];
-        if (jugador == 1 && (enemigo == NEGRA || enemigo == DAMA_NEGRA)) { fc = fEn; cc = cEn; return true; }
-        if (jugador == 2 && (enemigo == BLANCA || enemigo == DAMA_BLANCA)) { fc = fEn; cc = cEn; return true; }
-    }
-    return false;
-}
-
-bool esMovimientoSimple(int f1, int c1, int f2, int c2, int jugador) {
-    if (!posicionValida(f2, c2)) return false;
-    if (tablero[f2][c2] != VACIO) return false;
-    char pieza = tablero[f1][c1];
-    int df = f2 - f1;
-    int dc = c2 - c1;
-    if (esDama(pieza)) {
-        if (abs(df) != abs(dc)) return false;
-        int dirF = (df > 0) ? 1 : -1;
-        int dirC = (dc > 0) ? 1 : -1;
-        int pasos = abs(df);
-        for (int k = 1; k < pasos; k++) {
-            int rr = f1 + k * dirF;
-            int ccpos = c1 + k * dirC;
-            if (tablero[rr][ccpos] != VACIO) return false;
-        }
-        return true;
-    } else {
-        if (abs(df) != 1 || abs(dc) != 1) return false;
-        if (jugador == 1) {
-            if (df != -1) return false;
-        } else {
-            if (df != 1) return false;
-        }
-        return true;
-    }
-}
-
-bool piezaTieneCaptura(int f, int c, int jugador) {
-    char pieza = tablero[f][c];
-    int fc, cc;
-    if (esDama(pieza)) {
-        int dirs[4][2] = {{1,1},{1,-1},{-1,1},{-1,-1}};
-        for (int d = 0; d < 4; d++) {
-            int df = dirs[d][0], dc = dirs[d][1];
-            int rr = f + df;
-            int ccpos = c + dc;
-            while (posicionValida(rr, ccpos)) {
-                if (esCapturaDama(f, c, rr, ccpos, jugador, fc, cc)) return true;
-                rr += df; ccpos += dc;
-            }
-        }
-        return false;
-    } else {
-        int saltos[4][2] = {{2,2},{2,-2},{-2,2},{-2,-2}};
-        for (int s = 0; s < 4; s++) {
-            int rr = f + saltos[s][0];
-            int ccpos = c + saltos[s][1];
-            if (esCapturaMano(f, c, rr, ccpos, jugador, fc, cc)) return true;
-        }
-        return false;
-    }
-}
-
-bool hayCapturaDisponible(int jugador) {
-    for (int i = 0; i < TAMANO; i++) {
-        for (int j = 0; j < TAMANO; j++) {
-            if (esPiezaJugador(jugador, tablero[i][j])) {
-                if (piezaTieneCaptura(i,j,jugador)) return true;
-            }
-        }
-    }
-    return false;
-}
 
 bool realizarMovimiento(int f1, int c1, int f2, int c2, int jugador) {
     int fc = -1, cc = -1;
@@ -217,6 +119,7 @@ bool realizarMovimiento(int f1, int c1, int f2, int c2, int jugador) {
     }
 }
 
+
 bool jugadorTieneMovimientos(int jugador) {
     for (int i = 0; i < TAMANO; i++) {
         for (int j = 0; j < TAMANO; j++) {
@@ -245,13 +148,6 @@ bool jugadorTieneMovimientos(int jugador) {
     return false;
 }
 
-int contarPiezas(int jugador) {
-    int cont = 0;
-    for (int i = 0; i < TAMANO; i++)
-        for (int j = 0; j < TAMANO; j++)
-            if (esPiezaJugador(jugador, tablero[i][j])) cont++;
-    return cont;
-}
 
 bool verificarVictoriaYMostrar(int jugadorActual, const std::string &nombreJugador1, const std::string &nombreJugador2) {
     int otro = (jugadorActual == 1) ? 2 : 1;
@@ -267,3 +163,8 @@ bool verificarVictoriaYMostrar(int jugadorActual, const std::string &nombreJugad
     }
     return false;
 }
+
+
+
+
+

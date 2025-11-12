@@ -1,0 +1,32 @@
+void mostrarTablero(char tablero[10][10]) {
+    limpiarPantalla(); // Limpia la pantalla antes de volver a dibujar
+    
+    std::cout << "\n   ";
+    for (int j = 0; j < 10; j++)
+        std::cout << "  " << j << " "; // Encabezado de columnas (0-9)
+    std::cout << "\n";
+
+    for (int i = 0; i < 10; i++) {
+        std::cout << " " << i << " "; // Número de fila al inicio
+
+        for (int j = 0; j < 10; j++) {
+            bool casillaOscura = (i + j) % 2 == 1; // Define si la casilla es oscura
+            std::string fondo = casillaOscura ? "\033[100m" : "\033[47m"; // Gris oscuro o claro
+
+            char pieza = tablero[i][j];
+            std::string simbolo;
+
+            // Asignamos el símbolo visual de cada tipo de pieza
+            if (pieza == 'b') simbolo = "⚪";      // Blanca
+            else if (pieza == 'n') simbolo = "⚫"; // Negra
+            else if (pieza == 'B') simbolo = "🔷"; // Dama blanca
+            else if (pieza == 'N') simbolo = "🔶"; // Dama negra
+            else simbolo = " ";                    // Casilla vacía
+
+            // Imprime el cuadro con fondo y pieza
+            std::cout << fondo << " " << simbolo << " " << "\033[0m";
+        }
+
+        std::cout << "\n"; // Salto de línea para pasar a la siguiente fila
+    }
+}
