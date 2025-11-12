@@ -6,7 +6,6 @@
 #include <limits>
 #include <string>
 #include <windows.h>
-#include <chrono>
 
 const char* Fondo=BG_LIGHT;
 const char* texto = C_FUCSIA;
@@ -58,21 +57,21 @@ void configurarJugadores() {
 void mostrarReglas() {
     limpiarPantalla();
     Beep(1000, 150) ;
-    std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
-    std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
-    std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
-    std::cout << Fondo << texto << "  ================================    REGLAS   =====================================  " << std::endl;
-    std::cout << Fondo << texto << "- Tablero 10x10, se juega en casillas oscuras.                                        " << std::endl;
-    std::cout << Fondo << texto << "- Blancas (b) comienzan en filas abajo; negras (n) arriba.                            " << std::endl;
-    std::cout << Fondo << texto << "- Movimiento simple: diagonal 1 casilla hacia adelante (piezas normales).             " << std::endl;
-    std::cout << Fondo << texto << "- Captura: salto sobre pieza enemiga a casilla vacia detras (obligatorio si existe).  " << std::endl;
-    std::cout << Fondo << texto << "- Capturas multiples permitidas en un mismo turno.                                    " << std::endl;
-    std::cout << Fondo << texto << "- Dama: al coronar puede moverse y capturar a cualquier distancia diagonal.           " << std::endl;
-    std::cout << Fondo << texto << "- Gana quien capture todas las piezas enemigas o deje al oponente sin movimientos.    " << std::endl;
-    std::cout << Fondo << texto << " ===================================================================================  " << std::endl;
-    std::cout << Fondo << BORDES <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
-    std::cout << Fondo << BORDES <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
-    std::cout << Fondo << BORDES <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+    std::cout << Fondo2 << BORDES2 << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+    std::cout << Fondo2 << BORDES2 << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+    std::cout << Fondo2 << BORDES2 << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+    std::cout << Fondo2 << texto2 << "  ================================    REGLAS   =====================================  " << std::endl;
+    std::cout << Fondo2 << texto2 << "- Tablero 10x10, se juega en casillas oscuras.                                        " << std::endl;
+    std::cout << Fondo2 << texto2 << "- Blancas (b) comienzan en filas abajo; negras (n) arriba.                            " << std::endl;
+    std::cout << Fondo2 << texto2 << "- Movimiento simple: diagonal 1 casilla hacia adelante (piezas normales).             " << std::endl;
+    std::cout << Fondo2 << texto2 << "- Captura: salto sobre pieza enemiga a casilla vacia detras (obligatorio si existe).  " << std::endl;
+    std::cout << Fondo2 << texto2 << "- Capturas multiples permitidas en un mismo turno.                                    " << std::endl;
+    std::cout << Fondo2 << texto2 << "- Dama: al coronar puede moverse y capturar a cualquier distancia diagonal.           " << std::endl;
+    std::cout << Fondo2 << texto2 << "- Gana quien capture todas las piezas enemigas o deje al oponente sin movimientos.    " << std::endl;
+    std::cout << Fondo2 << texto2 << " ===================================================================================  " << std::endl;
+    std::cout << Fondo2 << BORDES2 <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+    std::cout << Fondo2 << BORDES2 <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+    std::cout << Fondo2 << BORDES2 <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
     pausarConEnter();
 }
 
