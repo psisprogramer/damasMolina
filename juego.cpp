@@ -10,7 +10,7 @@
 const char* Fondo=BG_LIGHT;
 const char* texto = C_FUCSIA;
 const char* BORDES = C_AZUL_CLARO;
-const char* Fondo2 =C_AMARILLO_ORO;
+const char* Fondo2 =BG_AMARILLO_ORO;
 const char* texto2= C_ROJO_SANGRE;
 const char* BORDES2 =C_VINOTINTO;
 const int ANCHO = 55;
@@ -60,7 +60,7 @@ void mostrarReglas() {
     std::cout << Fondo2 << BORDES2 << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
     std::cout << Fondo2 << BORDES2 << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
     std::cout << Fondo2 << BORDES2 << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
-    std::cout << Fondo2 << texto2 << "  ================================    REGLAS   =====================================  " << std::endl;
+    std::cout << Fondo2 << texto2 << "===================================    REGLAS   ======================================" << std::endl;
     std::cout << Fondo2 << texto2 << "- Tablero 10x10, se juega en casillas oscuras.                                        " << std::endl;
     std::cout << Fondo2 << texto2 << "- Blancas (b) comienzan en filas abajo; negras (n) arriba.                            " << std::endl;
     std::cout << Fondo2 << texto2 << "- Movimiento simple: diagonal 1 casilla hacia adelante (piezas normales).             " << std::endl;
@@ -68,7 +68,7 @@ void mostrarReglas() {
     std::cout << Fondo2 << texto2 << "- Capturas multiples permitidas en un mismo turno.                                    " << std::endl;
     std::cout << Fondo2 << texto2 << "- Dama: al coronar puede moverse y capturar a cualquier distancia diagonal.           " << std::endl;
     std::cout << Fondo2 << texto2 << "- Gana quien capture todas las piezas enemigas o deje al oponente sin movimientos.    " << std::endl;
-    std::cout << Fondo2 << texto2 << " ===================================================================================  " << std::endl;
+    std::cout << Fondo2 << texto2 << "======================================================================================" << std::endl;
     std::cout << Fondo2 << BORDES2 <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
     std::cout << Fondo2 << BORDES2 <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
     std::cout << Fondo2 << BORDES2 <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";

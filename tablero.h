@@ -15,6 +15,7 @@
 #define C_FUCSIA         "\033[38;5;201m"
 #define C_AZUL_CLARO     "\033[38;5;117m"
 #define C_AMARILLO_ORO   "\033[38;5;220m"
+#define BG_AMARILLO_ORO  "\033[48;5;220m"
 
 extern int TAMANO;
 extern char VACIO;
