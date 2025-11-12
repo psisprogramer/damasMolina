@@ -6,10 +6,14 @@
 #include <limits>
 #include <string>
 #include <windows.h>
+#include <chrono>
 
 const char* Fondo=BG_LIGHT;
 const char* texto = C_FUCSIA;
 const char* BORDES = C_AZUL_CLARO;
+const char* Fondo2 =C_AMARILLO_ORO;
+const char* texto2= C_ROJO_SANGRE;
+const char* BORDES2 =C_VINOTINTO;
 const int ANCHO = 55;
 
 std::string jugador1;
@@ -43,10 +47,10 @@ void pausarConEnter() {
 }
 
 void configurarJugadores() {
-    std::cout << std::endl << "Nombre del Jugador 1 (Blancas, juega primero): ";
+    std::cout << C_AMARILLO_ORO << BG_VINOTINTO << " ---> Nombre del Aventurero 1 (Blancas, juega primero): " << RESET << "\n";
     std::getline(std::cin, jugador1);
     if (jugador1.size() == 0) jugador1 = "Jugador1";
-    std::cout << "Nombre del Jugador 2 (Negras): ";
+    std::cout << C_AMARILLO_ORO << BG_VINOTINTO << " ---> Nombre del Aventurero 2 (Negras, juega segundo): " << RESET << "\n";
     std::getline(std::cin, jugador2);
     if (jugador2.size() == 0) jugador2 = "Jugador2";
 }
@@ -54,14 +58,21 @@ void configurarJugadores() {
 void mostrarReglas() {
     limpiarPantalla();
     Beep(1000, 150) ;
-    std::cout << std::endl << "==== REGLAS ====" << std::endl;
-    std::cout << "- Tablero 10x10, se juega en casillas oscuras." << std::endl;
-    std::cout << "- Blancas (b) comienzan en filas abajo; negras (n) arriba." << std::endl;
-    std::cout << "- Movimiento simple: diagonal 1 casilla hacia adelante (piezas normales)." << std::endl;
-    std::cout << "- Captura: salto sobre pieza enemiga a casilla vacia detras (obligatorio si existe)." << std::endl;
-    std::cout << "- Capturas multiples permitidas en un mismo turno." << std::endl;
-    std::cout << "- Dama: al coronar puede moverse y capturar a cualquier distancia diagonal." << std::endl;
-    std::cout << "- Gana quien capture todas las piezas enemigas o deje al oponente sin movimientos." << std::endl << std::endl;
+    std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+    std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+    std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+    std::cout << Fondo << texto << "  ================================    REGLAS   =====================================  " << std::endl;
+    std::cout << Fondo << texto << "- Tablero 10x10, se juega en casillas oscuras.                                        " << std::endl;
+    std::cout << Fondo << texto << "- Blancas (b) comienzan en filas abajo; negras (n) arriba.                            " << std::endl;
+    std::cout << Fondo << texto << "- Movimiento simple: diagonal 1 casilla hacia adelante (piezas normales).             " << std::endl;
+    std::cout << Fondo << texto << "- Captura: salto sobre pieza enemiga a casilla vacia detras (obligatorio si existe).  " << std::endl;
+    std::cout << Fondo << texto << "- Capturas multiples permitidas en un mismo turno.                                    " << std::endl;
+    std::cout << Fondo << texto << "- Dama: al coronar puede moverse y capturar a cualquier distancia diagonal.           " << std::endl;
+    std::cout << Fondo << texto << "- Gana quien capture todas las piezas enemigas o deje al oponente sin movimientos.    " << std::endl;
+    std::cout << Fondo << texto << " ===================================================================================  " << std::endl;
+    std::cout << Fondo << BORDES <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+    std::cout << Fondo << BORDES <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+    std::cout << Fondo << BORDES <<".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
     pausarConEnter();
 }
 
@@ -117,11 +128,11 @@ void mostrarMenu() {
         std::cout << Fondo << BORDES << "\n.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
         std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
         std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
-        std::cout << Fondo << texto << "   ======== DAMAS INTERNACIONALES - EL RETO ========  " << RESET << "\n";
+        std::cout << Fondo << texto << "========== DAMAS INTERNACIONALES - EL RETO ===========" << RESET << "\n";
         std::cout << Fondo << texto << "|                                                    |" << RESET << "\n"; 
         std::cout << Fondo << texto << "|  1. Lanzarse a la aventura (Nueva partida)!        |" << RESET << "\n"; 
         std::cout << Fondo << texto << "|  2. Codice Ancestral (Ver reglas)                  |" << RESET << "\n"; 
-        std::cout << Fondo << texto << "|  3.  Rendicion! (Salir del juego)                  |" << RESET << "\n";
+        std::cout << Fondo << texto << "|  3. Rendicion! (Salir del juego)                   |" << RESET << "\n";
         std::cout << Fondo << texto << "|                                                    |" << RESET << "\n"; 
         std::cout << Fondo << texto << "======================================================" << RESET << "\n";
         std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
@@ -130,35 +141,38 @@ void mostrarMenu() {
         int opcion = leerEnteroSeguro(C_AMARILLO_ORO "      ---> Elige tu destino (1, 2 o 3):" RESET);
         
         if (opcion == 1) {
-            std::cout << "\n" << C_AMARILLO_ORO << BG_VINOTINTO << "¡Prepara tus fichas! La batalla esta a punto de comenzar..." << RESET << "\n";
+            std::cout << "\n" << C_AMARILLO_ORO << BG_VINOTINTO << "Prepara tus fichas! La batalla esta a punto de comenzar..." << RESET << "\n";
             Beep(300, 400); 
             pausarConEnter();
             jugarPartida();
             std::cout << "\a\n";
         } else if (opcion == 2) {
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
-            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << "\nDesempolvando el pergamino de la sabiduria milenaria..." << RESET << "\n";
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << "Desempolvando el pergamino de la sabiduria milenaria..." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:." << RESET << "\n";
+            pausarConEnter();
             mostrarReglas();
         } else if (opcion == 3) {
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
-            std::cout << C_AMARILLO_ORO << BG_VINOTINTO "\nAdios, gran estratega. ¡Que los dados te sean favorables hasta que volvamos a vernos!" << RESET << "\n";
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << "Adios, gran estratega. Que los dados te sean favorables hasta que volvamos a vernos!  " << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:..:.:.:.:.:.:.:." << RESET << "\n";
             Beep(300, 100); 
-            Beep(200, 100); 
-        } else {
-            Beep(500, 300);
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
-            std::cout << C_ROJO << "\n¡ERROR CRITICO DE ELECCION! Esa opcion no existe en este universo. Intenta de nuevo..." << RESET << "\n";
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
-            std::cout << Fondo << BORDES << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.." << RESET << "\n";
+            Beep(200, 100);
             pausarConEnter();
             break;
+        } else {
+            Beep(500, 300);
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:." << RESET << "\n";
+            std::cout << C_ROJO << "ERROR CRITICO DE ELECCION! Esa opcion no existe en este universo. Intenta de nuevo..." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:." << RESET << "\n";
+            std::cout << C_AMARILLO_ORO << BG_VINOTINTO << ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:." << RESET << "\n";
+            pausarConEnter();
+            
     }
 }
 }
